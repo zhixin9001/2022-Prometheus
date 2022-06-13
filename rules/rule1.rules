@@ -1,0 +1,12 @@
+groups:
+- name: rule1     # 组名
+  rules:
+  - alert: http_requests_received_total 1  # 规则名称
+    expr: increase(http_requests_received_total{endpoint="WeatherForecast"}[15s]) >= 1        # 匹配规则 实例宕机 promQl 表达式
+    for: 3s             # 检测持续时间
+    annotations:         # 告警自己也是一个时间序列 注解
+      title: "instance down" # 告警标题
+      description: 'Instance has been down for more than 1 minute {{ $value }}.' # 告警详情
+    labels:              # 新标签
+      serverity: "critical"
+      group_by: "node"
