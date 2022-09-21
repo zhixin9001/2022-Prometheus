@@ -6,20 +6,23 @@ global:
   # external systems (federation, remote storage, Alertmanager).
   external_labels:
     monitor: 'codelab-monitor'
-    prometheus: monitoring-cluster
-    prometheus_replica: replica-1
 
 # A scrape configuration containing exactly one endpoint to scrape:
 # Here it's Prometheus itself.
 scrape_configs:
-  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
-  - job_name: 'prometheus'
-
-    # Override the global default and scrape targets from this job every 5 seconds.
-    scrape_interval: 5s
-
+  - job_name: 'federate'
+    scrape_interval: 15s
+    honor_labels: true
+    metrics_path: '/federate'
+    params:
+      'match[]':
+        - '{job="prometheus"}'
+        - '{__name__=~"job:.*"}'
+        - '{__name__=~"node.*"}'
     static_configs:
-      - targets: ['host.docker.internal:5009']
+      - targets:
+        - 'host.docker.internal:9090'
+        - 'host.docker.internal:9091'
 
 rule_files:
   # - /etc/prometheus/rules/*.rules

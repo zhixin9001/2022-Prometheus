@@ -1,0 +1,12 @@
+{
+  "Type": null,
+  "Payload": {
+    "EventType": "NzPayRunCreatedEvent",
+    "PayRunId": 43,
+    "BusinessId": "9e249c04-cade-4420-8c80-9cd48535b6da"
+  },
+  "EventId": "f53752b3-a5e9-437d-9cd6-fcb50b4d7303",
+  "PartitionKey": "9e249c04-cade-4420-8c80-9cd48535b6da",
+  "TriggeredBy": "PayEmployeeTransactionsNZCreateService",
+  "SentAt": "2022-08-17T05:10:01.1254567+00:00"
+}
